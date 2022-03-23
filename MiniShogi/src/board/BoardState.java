@@ -16,6 +16,10 @@ public class BoardState {
     private final Player white;
     private final Player black;
 
+    private boolean isFinished = false;
+
+    private final boolean isDebug = false;
+
     /**
      * @param w width
      * @param h height
@@ -30,10 +34,10 @@ public class BoardState {
     }
 
     public void set(int x, int y, Piece piece) {
-        if (x >= w || y >= h) 
+        if (x >= w || y >= h) {
             System.out.println("invalid coordinates");
-        else
-            pieces[x][y] = piece;
+        }
+        else pieces[x][y] = piece;
     }
 
     public void set(Grid grid, Piece piece) {
@@ -42,9 +46,15 @@ public class BoardState {
 
     public boolean play(MoveCommand command, boolean isBlack) {
         Piece toHit = get(command.to);
-        if (toHit != null && toHit.isBlack() == isBlack) return false;
+        if (toHit != null && toHit.isBlack() == isBlack) {
+            System.out.println("can't hit");
+            return false;
+        }
         Piece piece = get(command.from);
-        if (piece == null || !piece.isEqual(command.piece)) return false;
+        if (piece == null || !piece.isEqual(command.piece)) {
+            System.out.println("invalid piece");
+            return false;
+        }
         return play(command.from, command.to, piece,
             isBlack ? black : white
         );
@@ -55,11 +65,21 @@ public class BoardState {
     }
     
     private boolean play(Grid from, Grid to, Piece piece, Player player) {
-        if (!piece.canGo(from, to, player.isBlack)) return false;
-        if (!from.to(to).allMatch(this::isFree)) return false;
+        if (isFinished) return false;
+        
+        if (!piece.canGo(from, to, player.isBlack)) {
+            if (isDebug)
+                System.out.println("piece can't go");
+            return false;
+        }
+        if (!from.to(to).allMatch(this::isFree)) {
+            if (isDebug)
+                System.out.println("path is full");
+            return false;
+        }
         
         // check for capture
-        var toHit = get(to);
+        Piece toHit = get(to);
         if (toHit != null) {
             toHit.capture();
             player.addHand(toHit);
@@ -81,7 +101,7 @@ public class BoardState {
 
     /* do not check grid */
     public boolean drop(char p, Grid grid, boolean isBlack) {
-        var piece = isBlack ? black.drop(p) : white.drop(p);
+        Piece piece = isBlack ? black.drop(p) : white.drop(p);
         if (piece == null) return false;
         set(grid, piece);
         return true;
@@ -97,29 +117,52 @@ public class BoardState {
 
     @Override
     public String toString() {
+        if (white.isWon() || black.isWon()) {
+            isFinished = true;
+            
+        }
+
         StringBuilder builder = new StringBuilder(w*h);
 
-        for (int i=0; i<w; ++i) {
-            for (int j=0; j<h; ++j) {
-                var piece = pieces[i][j];
+        for (int j=0; j<h; ++j) {
+            for (int i=0; i<w; ++i) {
+                Piece piece = pieces[i][j];
                 builder.append(piece == null ? '-' : piece.toString());
             }
         }
+
+        builder
+            .append("\n")
+            .append(black.printHand())
+            .append("\n")
+            .append(white.printHand());
 
         return builder.toString();
     }
 
     public void beautifulPrint(PrintStream out) {
         for (int j=h-1; j>=0; --j) {
+            out.print((j+1)+ ": ");
             for (int i=0; i<w; ++i) {
-                var p = get(i, j);
+                Piece p = get(i, j);
                 out.print(
                     p==null?"-":p.toString()
                 );
             }
             out.println();
         }
+        out.print("   ");
+        for (int i=0; i<w; ++i)
+            out.print((i+1));
         out.println();
+    }
+
+    public boolean isFinished() { return white.isWon() || black.isWon(); }
+
+    public String getWinner() {
+        if (white.isWon()) return "white";
+        if (black.isWon()) return "black";
+        return null;
     }
 
     public int getWidth() { return w; }

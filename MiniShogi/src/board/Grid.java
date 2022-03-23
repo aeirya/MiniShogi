@@ -1,6 +1,9 @@
 package board;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
+import java.util.stream.Stream.Builder;
 
 public class Grid {
     public final int x;
@@ -13,7 +16,15 @@ public class Grid {
 
     @Override
     public String toString() {
-        return x + ":" + y;
+        return x + "" + y;
+    }
+
+    public Grid printable() {
+        return new Grid(x+1, y+1);
+    }
+
+    public int distance(Grid other) {
+        return Math.max(Math.abs(other.x - x), Math.abs(other.y - y));
     }
 
     @Override
@@ -43,7 +54,15 @@ public class Grid {
     public Stream<Grid> to(Grid to) {
         int dx = sign(x, to.x);
         int dy = sign(y, to.y);
-        return Stream.iterate(next(dx, dy), g -> !g.equals(to), g -> g.next(dx, dy));
+        // not java 8 compatible: return Stream.iterate(next(dx, dy), g -> !g.equals(to), g -> g.next(dx, dy));
+        
+        List<Grid> items = new ArrayList<>();
+        Grid n = next(dx, dy);
+        while (!n.equals(to)) {
+            items.add(n);
+            n = n.next(dx, dy);
+        }
+        return items.stream();
     }
 
     @Override

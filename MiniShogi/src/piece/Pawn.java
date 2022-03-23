@@ -5,9 +5,14 @@ import java.util.List;
 public class Pawn extends Piece {
 
     public Pawn(boolean isBlack) {
-        super(isBlack,
-            new Gold(isBlack),
-            List.of(MoveSet.ONLY_FORWARD, MoveSet.VERTICAL, MoveSet.SHORT_RANGED)
+        super(
+            new PieceFactory()
+                .color(isBlack)
+                .upgrade(new Gold(isBlack))
+                .orRule(MoveSet.VERTICAL)
+                .andRule(MoveSet.ONLY_FORWARD)
+                .andRule(MoveSet.SHORT_RANGED)
+                .build()
         );
     }
 

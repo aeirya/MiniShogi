@@ -7,9 +7,9 @@ public class Bishop extends Piece {
             new PieceFactory()
                 .color(isBlack)
                 .orRule(MoveSet.DIAGONAL)
-                .upgrade(new Ranger(isBlack))
+                .andRule(MoveSet.ONLY_FORWARD)
+                .upgrade(new BishopUpgrade(isBlack))
                 .build()
         );
     }
-
 }

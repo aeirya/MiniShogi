@@ -37,18 +37,6 @@ public class Piece {
         this(isBlack, null, moveSets);
     }
 
-    protected Piece(boolean isBlack, List<IRule> moves, IRule andRule) {
-        this(isBlack, null, moves, List.of(andRule));
-    }
-
-    protected Piece(boolean isBlack, IRule... rules) {
-        this(isBlack, List.of(rules));
-    }
-
-    protected Piece(boolean isBlack, IRule moveset) {
-        this(isBlack, List.of(moveset));
-    }
-
     public boolean isBlack() {
         return this.isBlack;
     }
@@ -60,6 +48,8 @@ public class Piece {
     public void capture() {
         this.isBlack = !isBlack;
         this.isUpgrade = false;
+        if (this.upgrade != null) 
+            upgrade.capture();
     }
 
     public void upgrade() {

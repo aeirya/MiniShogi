@@ -13,7 +13,7 @@ public class Input {
     }
 
     public MoveCommand read() {
-        var c = readChar();
+        char c = readChar();
         if (c == '0') return null;
         
         if (c < 65 || c > 123)

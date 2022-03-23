@@ -4,7 +4,7 @@ public class LatinPiecePrinter {
     private LatinPiecePrinter() { }
 
     public static String toString(Piece piece) {
-        var letter = getLetter(piece);
+        String letter = getLetter(piece);
         if (letter ==  null) return letter;
 
         if (piece.isBlack()) return letter;
@@ -22,4 +22,8 @@ public class LatinPiecePrinter {
         if (piece instanceof Ranger) return "n";
         else return null;
     }
+
+    public static String getLetterKing(boolean isBlack) {
+        return new King(isBlack).toString();
+    } 
 }

@@ -7,7 +7,7 @@ public class MoveCommand {
     public final char piece;
     public final Grid from;
     public final Grid to;
-
+    
     public MoveCommand(char piece, Grid from, Grid to) {
         this.piece = piece;
         this.from = from;
@@ -19,4 +19,16 @@ public class MoveCommand {
             return board.drop(piece, to, isBlack);
         return board.play(this, isBlack);
     }
+
+    @Override
+    public String toString() {
+        return new StringBuilder()
+            .append(piece)
+            .append(" ")
+            .append(from.printable().toString())
+            .append(" ")
+            .append(to.printable().toString())
+            .toString();
+    }
+
 }

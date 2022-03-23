@@ -1,5 +1,6 @@
 package piece;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import board.Board;
@@ -31,7 +32,9 @@ public enum MoveSet implements IRule {
                 return Math.abs(to.x - from.x) <= 1 && Math.abs(to.y - from.y) <= 1;
 
             case ANY_DIR:
-                return canGo(from, to, isBlack, List.of(MoveSet.DIAGONAL, MoveSet.SIDEWAYS, MoveSet.VERTICAL));
+                return MoveSet.DIAGONAL.canGo(from, to, isBlack)
+                 || MoveSet.SIDEWAYS.canGo(from, to, isBlack)
+                 || MoveSet.VERTICAL.canGo(from, to, isBlack);
              
             case BEHIND_DIAG:
                 return DIAGONAL.canGo(from, to, isBlack) && !ONLY_FORWARD.canGo(from, to, isBlack);

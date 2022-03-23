@@ -23,7 +23,7 @@ public class Window extends JFrame {
         }
         mainPanel.add(gridPanel);
         mainPanel.add(new JLabel("status"));
-        this.setContentPane(mainPanel);
+        this.setContentPane(gridPanel);
     }
     
     public void start() {

@@ -1,17 +1,18 @@
 package piece;
 
-import java.util.List;
-
 import board.Grid;
 
 public class Silver extends Piece {
 
     public Silver(boolean isBlack) {
         super(
-            isBlack,
-            null,
-            List.of(MoveSet.ANY_DIR),
-            List.of(MoveSet.ONLY_FORWARD, MoveSet.SHORT_RANGED)
+            new PieceFactory()
+                .color(isBlack)
+                .upgrade(new UpgradedSilver(isBlack))
+                .orRule(MoveSet.ANY_DIR)
+                .andRule(MoveSet.ONLY_FORWARD)
+                .andRule(MoveSet.SHORT_RANGED)
+                .build()
         );
     }
 

@@ -42,6 +42,19 @@ public class Board {
         state.beautifulPrint(out);
     }
 
+    public boolean isFinished() {
+        return state.isFinished();
+    }
+
+    public String getWinner() {
+        return state.getWinner();
+    }
+
+    @Override
+    public String toString() {
+        return state.toString();
+    }
+
     // public static void main(String[] args) {
     //     Board board = new Board();
     //     board.drop(0, 0, new Lance(true));
