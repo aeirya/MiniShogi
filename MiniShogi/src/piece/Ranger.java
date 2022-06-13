@@ -11,5 +11,4 @@ public class Ranger extends Piece {
                 .build()
         );
     }
-    
 }

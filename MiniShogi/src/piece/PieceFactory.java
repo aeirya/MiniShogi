@@ -48,6 +48,4 @@ public class PieceFactory {
     public Piece build() {
         return new Piece(isBlack, upgrade, orRules, andRules);
     }
-    
-    
 }

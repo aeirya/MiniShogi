@@ -3,6 +3,7 @@ package board;
 import java.io.PrintStream;
 
 import action.MoveCommand;
+import model.GameState;
 import piece.King;
 import piece.Pawn;
 import piece.Piece;
@@ -15,6 +16,8 @@ public class BoardState {
 
     private final Player white;
     private final Player black;
+
+    private boolean isBlackTurn;
 
     private boolean isFinished = false;
 
@@ -31,11 +34,13 @@ public class BoardState {
 
         white = new Player(false);
         black = new Player(true);
+        isBlackTurn = true;
     }
 
     public void set(int x, int y, Piece piece) {
         if (x >= w || y >= h) {
-            System.out.println("invalid coordinates");
+            if (isDebug)
+                System.out.println("invalid coordinates");
         }
         else pieces[x][y] = piece;
     }
@@ -47,12 +52,14 @@ public class BoardState {
     public boolean play(MoveCommand command, boolean isBlack) {
         Piece toHit = get(command.to);
         if (toHit != null && toHit.isBlack() == isBlack) {
-            System.out.println("can't hit");
+            if (isDebug)
+                System.out.println("can't hit");
             return false;
         }
         Piece piece = get(command.from);
-        if (piece == null || !piece.isEqual(command.piece)) {
-            System.out.println("invalid piece");
+        if (piece == null || !piece.isEqual(command.piece) || piece.isBlack() != isBlack) {
+            if (isDebug)
+                System.out.println("invalid piece");
             return false;
         }
         return play(command.from, command.to, piece,
@@ -72,6 +79,7 @@ public class BoardState {
                 System.out.println("piece can't go");
             return false;
         }
+
         if (!from.to(to).allMatch(this::isFree)) {
             if (isDebug)
                 System.out.println("path is full");
@@ -96,6 +104,7 @@ public class BoardState {
             piece.upgrade();
         }
         
+        isBlackTurn = !isBlackTurn;
         return true;
     }
 
@@ -115,11 +124,16 @@ public class BoardState {
         return pieces[grid.x][grid.y];
     }
 
+    public GameState getState() {
+        return new GameState(
+            pieces, black.getHand(), white.getHand(), w, h, isFinished, isBlackTurn
+        );
+    }
+
     @Override
     public String toString() {
         if (white.isWon() || black.isWon()) {
             isFinished = true;
-            
         }
 
         StringBuilder builder = new StringBuilder(w*h);

@@ -18,7 +18,8 @@ public class Silver extends Piece {
 
     @Override
     public boolean canGo(Grid from, Grid to, boolean isBlack) {
-        return super.canGo(from, to, isBlack) || to.equals(from.next(-1, -1)) || to.equals(from.next(1, -1));
+        int i = isBlack ? (-1) : 1;
+        return super.canGo(from, to, isBlack) || to.equals(from.next(-1, -1 * i)) || to.equals(from.next(1, -1 * i));
     }
     
 }

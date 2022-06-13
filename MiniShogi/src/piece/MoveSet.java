@@ -1,6 +1,5 @@
 package piece;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import board.Board;
@@ -53,20 +52,8 @@ public enum MoveSet implements IRule {
         public IRule negate() {
             return (from, to, isBlack) -> ! this.canGo(from, to, isBlack);
         }
-
-        // public IRule and(IRule move) {
-        //     if (move instanceof RuleSet) {
-        //         ((RuleSet) move).add(move);
-        //         return move;
-        //     } else {
-        //         return new RuleSet(List.of(this, move));
-        //     }
-        // }
         
         private static boolean canGo(Grid from, Grid to, boolean isBlack, List<MoveSet> movesets) {
             return movesets.stream().anyMatch(s -> s.canGo(from, to, isBlack));
         }
-
-
-
 }

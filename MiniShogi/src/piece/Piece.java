@@ -65,7 +65,9 @@ public class Piece {
     public boolean canGo(Grid from, Grid to, boolean isBlack) {
         if (isUpgrade) 
             return this.upgrade.canGo(from, to, isBlack);
-        return movesets.stream().anyMatch(m -> m.canGo(from, to, isBlack)) && andRules.stream().allMatch(m -> m.canGo(from, to, isBlack));
+        return movesets.stream()
+            .anyMatch(m -> m.canGo(from, to, isBlack)) && 
+            andRules.stream().allMatch(m -> m.canGo(from, to, isBlack));
     }
 
     @Override

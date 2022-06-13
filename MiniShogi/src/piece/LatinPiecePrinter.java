@@ -25,5 +25,9 @@ public class LatinPiecePrinter {
 
     public static String getLetterKing(boolean isBlack) {
         return new King(isBlack).toString();
-    } 
+    }
+
+    public static boolean isBlack(char piece) {
+        return piece >= 'a' && piece <= 'z';
+    }
 }

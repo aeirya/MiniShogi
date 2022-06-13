@@ -3,10 +3,12 @@ package board;
 import java.io.PrintStream;
 
 import action.MoveCommand;
+import controller.IBoard;
+import model.GameState;
 import piece.Piece;
 import util.Config;
 
-public class Board {
+public class Board implements IBoard {
     private final BoardState state;   
     
     public Board() {
@@ -53,6 +55,10 @@ public class Board {
     @Override
     public String toString() {
         return state.toString();
+    }
+
+    public GameState getState() {
+        return state.getState();
     }
 
     // public static void main(String[] args) {

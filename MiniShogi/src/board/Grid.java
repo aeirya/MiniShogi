@@ -3,7 +3,7 @@ package board;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
-import java.util.stream.Stream.Builder;
+// import java.util.stream.Stream.Builder;
 
 public class Grid {
     public final int x;
@@ -24,7 +24,7 @@ public class Grid {
     }
 
     public int distance(Grid other) {
-        return Math.max(Math.abs(other.x - x), Math.abs(other.y - y));
+        return Math.abs(other.x - x) + Math.abs(other.y - y);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class Grid {
         return new Grid(x+dx, y+dy);
     }
 
-    private int sign(int from, int to) {
+    private static int sign(int from, int to) {
         if (to > from) return 1;
         else if (to < from) return -1;
         return 0;
@@ -54,10 +54,11 @@ public class Grid {
     public Stream<Grid> to(Grid to) {
         int dx = sign(x, to.x);
         int dy = sign(y, to.y);
-        // not java 8 compatible: return Stream.iterate(next(dx, dy), g -> !g.equals(to), g -> g.next(dx, dy));
+        // not java 8 compatible: 
+        // return Stream.iterate(next(dx, dy), g -> !g.equals(to), g -> g.next(dx, dy));
         
         List<Grid> items = new ArrayList<>();
-        Grid n = next(dx, dy);
+        Grid n = this.next(dx, dy);
         while (!n.equals(to)) {
             items.add(n);
             n = n.next(dx, dy);
@@ -69,9 +70,4 @@ public class Grid {
     public int hashCode() {
         return super.hashCode() + x * 100 + y;
     }
-
-    // public static void main(String[] args) {
-    //     Grid g = new Grid(1, 1);
-    //     g.to(new Grid(5, 5)).forEach(gg -> System.out.println(gg.toString()));
-    // }
 }

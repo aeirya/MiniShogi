@@ -13,12 +13,12 @@ P
 KGSB----------l------bsgk
 pl
 P
-KGSB----------l----k-bsg-
+KGSB----------l------bsgk
 pl
 P
--GSB-K--------l----k-bsg-
+-GSB-K--------l------bsgk
 pl
 P
--GSB-K----l--------k-bsg-
+-GSB-K----l----------bsgk
 pl
 P

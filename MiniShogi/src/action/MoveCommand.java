@@ -1,7 +1,7 @@
 package action;
 
-import board.Board;
 import board.Grid;
+import controller.IBoard;
 
 public class MoveCommand {
     public final char piece;
@@ -14,7 +14,7 @@ public class MoveCommand {
         this.to = to;
     }
 
-    public boolean play(Board board, boolean isBlack) {
+    public boolean play(IBoard board, boolean isBlack) {
         if (from.equals(-1, -1)) 
             return board.drop(piece, to, isBlack);
         return board.play(this, isBlack);

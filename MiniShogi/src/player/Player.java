@@ -38,4 +38,8 @@ public class Player {
     public String printHand() {
         return hand.stream().map(Piece::toString).collect(Collectors.joining());
     }
+
+    public List<Character> getHand() {
+        return hand.stream().map(Piece::toString).map(s -> s.charAt(0)).collect(Collectors.toList());
+    }
 }

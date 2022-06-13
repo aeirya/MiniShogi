@@ -1,0 +1,188 @@
+round : 0
+
+KGSBLP-------------plbsgk
+
+
+5: lbsgk
+4: ----p
+3: -----
+2: P----
+1: KGSBL
+   12345
+round : 1
+
+KGSBLP-----------g-plbs-k
+
+
+5: lbs-k
+4: --g-p
+3: -----
+2: P----
+1: KGSBL
+   12345
+round : 2
+
+-GSBLPK----------g-plbs-k
+
+
+5: lbs-k
+4: --g-p
+3: -----
+2: PK---
+1: -GSBL
+   12345
+round : 3
+
+-GSBLPK---l------g-p-bs-k
+
+
+5: -bs-k
+4: --g-p
+3: l----
+2: PK---
+1: -GSBL
+   12345
+round : 4
+
+-GSBL-K---P------g-p-bs-k
+
+L
+5: -bs-k
+4: --g-p
+3: P----
+2: -K---
+1: -GSBL
+   12345
+round : 5
+
+-GSBL-K---P-----sg-p-b--k
+
+L
+5: -b--k
+4: -sg-p
+3: P----
+2: -K---
+1: -GSBL
+   12345
+round : 6
+
+-GSBL-K---P----Lsg-p-b--k
+
+
+5: -b--k
+4: Lsg-p
+3: P----
+2: -K---
+1: -GSBL
+   12345
+round : 7
+
+-GSBL-K---P----Lsg-p-b--k
+
+
+5: -b--k
+4: Lsg-p
+3: P----
+2: -K---
+1: -GSBL
+   12345
+round : 8
+
+-GSBL-K---Ps---L-g-p-b--k
+
+
+5: -b--k
+4: L-g-p
+3: Ps---
+2: -K---
+1: -GSBL
+   12345
+round : 9
+
+-GSBL-K---Ps---L-g-p-b--k
+
+
+5: -b--k
+4: L-g-p
+3: Ps---
+2: -K---
+1: -GSBL
+   12345
+round : 10
+
+-GSBL-K---Ps-----g-pLb--k
+
+
+5: Lb--k
+4: --g-p
+3: Ps---
+2: -K---
+1: -GSBL
+   12345
+round : 11
+
+-GSBL-K---Ps-----g-pLb--k
+
+
+5: Lb--k
+4: --g-p
+3: Ps---
+2: -K---
+1: -GSBL
+   12345
+round : 12
+
+-GSBLsK---P------g-pLb--k
+
+
+5: Lb--k
+4: --g-p
+3: P----
+2: sK---
+1: -GSBL
+   12345
+round : 13
+
+-GSBLsK---P------g-p-L--k
+
+B
+5: -L--k
+4: --g-p
+3: P----
+2: sK---
+1: -GSBL
+   12345
+round : 14
+
+sGSBL-K---P------g-p-L--k
+
+B
+5: -L--k
+4: --g-p
+3: P----
+2: -K---
+1: sGSBL
+   12345
+round : 15
+
+sGSBL-----P-K----g-p-L--k
+
+B
+5: -L--k
+4: --g-p
+3: P-K--
+2: -----
+1: sGSBL
+   12345
+round : 16
+
+-GSBL-----P-s----g-p-L--k
+k
+B
+5: -L--k
+4: --g-p
+3: P-s--
+2: -----
+1: -GSBL
+   12345
+black wins!

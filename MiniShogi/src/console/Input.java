@@ -1,5 +1,7 @@
 package console;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import action.MoveCommand;
@@ -10,6 +12,10 @@ public class Input {
 
     public Input() {
         scanner = new Scanner(System.in);
+    }
+
+    public Input(String filepath) throws FileNotFoundException {
+        scanner = new Scanner(new File(filepath));
     }
 
     public MoveCommand read() {
